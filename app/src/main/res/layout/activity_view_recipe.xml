@@ -1,122 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ViewRecipe">
 
-    <ScrollView
-        android:id="@+id/instructions"
-        android:layout_width="344dp"
-        android:layout_height="253dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <TextView
+        android:id="@+id/recipeName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Recipe Name"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.92">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listOfIngredients"
-        android:layout_width="162dp"
-        android:layout_height="189dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.124"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.357" />
+        android:layout_margin="16dp" />
 
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="85dp"
-        android:layout_height="54dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
+    <TextView
+        android:id="@+id/categoryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category: Dinner"
+        app:layout_constraintTop_toBottomOf="@id/recipeName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023"
-        app:srcCompat="@drawable/arrowright" />
+        android:layout_marginStart="16dp" />
 
     <TextView
         android:id="@+id/instructionsHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Instructions"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:text="Instructions:"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/categoryName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.591" />
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp" />
 
     <TextView
-        android:id="@+id/ingredientsHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingredients "
+        android:id="@+id/instructions"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Full instructions go here..."
+        android:padding="8dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/instructionsHeading"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.091"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.234" />
-
-    <ImageView
-        android:id="@+id/recipeImage"
-        android:layout_width="145dp"
-        android:layout_height="151dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.898"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.305"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/recipeName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Recipe Name"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.126" />
+        android:layout_margin="16dp" />
 
     <Button
         android:id="@+id/editButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Edit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.916"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.032" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
 
-    <TextView
-        android:id="@+id/categoryName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="category: Dinner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.948"
-        app:layout_constraintStart_toStartOf="parent"
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="Back"
+        app:srcCompat="@drawable/arrowright"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.136" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
