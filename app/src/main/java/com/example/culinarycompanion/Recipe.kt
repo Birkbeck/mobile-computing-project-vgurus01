@@ -11,3 +11,4 @@ data class Recipe(
     val ingredients: String,
     val instructions: String
 )
+

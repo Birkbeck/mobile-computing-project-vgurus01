@@ -10,15 +10,21 @@ class RecipeViewModel(application: Application) : AndroidViewModel(application) 
     private val recipeDao = RecipeDatabase.getDatabase(application).recipeDao()
     val allRecipes: LiveData<List<Recipe>> = recipeDao.getAllRecipes()
 
-    fun insert(recipe: Recipe) {
-        Thread { recipeDao.insert(recipe) }.start()
+    fun addRecipe(recipe: Recipe) {
+        Thread {
+            recipeDao.insert(recipe)
+        }.start()
     }
 
-    fun update(recipe: Recipe) {
-        Thread { recipeDao.update(recipe) }.start()
+    fun modifyRecipe(recipe: Recipe) {
+        Thread {
+            recipeDao.update(recipe)
+        }.start()
     }
 
-    fun delete(recipe: Recipe) {
-        Thread { recipeDao.delete(recipe) }.start()
+    fun removeRecipe(recipe: Recipe) {
+        Thread {
+            recipeDao.delete(recipe)
+        }.start()
     }
 }

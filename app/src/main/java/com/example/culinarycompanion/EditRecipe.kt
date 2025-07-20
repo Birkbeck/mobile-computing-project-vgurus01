@@ -5,52 +5,45 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Spinner
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.culinarycompanion.data.Recipe
 import androidx.lifecycle.ViewModelProvider
+import com.example.culinarycompanion.data.Recipe
 
 class EditRecipe : AppCompatActivity() {
-
-    private lateinit var viewModel: RecipeViewModel
-    private var currentRecipe: Recipe? = null
+    private lateinit var recipeViewModel: RecipeViewModel
+    private var editingRecipe: Recipe? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_recipe)
 
-        val id = intent.getIntExtra("recipe_id", -1)
-        viewModel = ViewModelProvider(this)[RecipeViewModel::class.java]
+        recipeViewModel = ViewModelProvider(this)[RecipeViewModel::class.java]
+        val recipeId = intent.getIntExtra("recipe_id", -1)
 
-        val nameField = findViewById<EditText>(R.id.recipeName)
-        val spinner = findViewById<Spinner>(R.id.spinner)
+        val nameInput = findViewById<EditText>(R.id.recipeName)
+        val categorySpinner = findViewById<Spinner>(R.id.spinner)
 
-        viewModel.allRecipes.observe(this) { recipes ->
-            val recipe = recipes.find { it.id == id }
-            recipe?.let {
-                currentRecipe = it
-                nameField.setText(it.name)
-                // Set spinner selection if needed
-                // Load ingredients/instructions if using extra fields
+        recipeViewModel.allRecipes.observe(this) { recipes ->
+            editingRecipe = recipes.find { it.id == recipeId }
+            editingRecipe?.let {
+                nameInput.setText(it.name)
             }
         }
 
         findViewById<Button>(R.id.saveButton).setOnClickListener {
-            val updated = currentRecipe?.copy(
-                name = nameField.text.toString(),
-                category = spinner.selectedItem.toString()
-            )
-            if (updated != null) {
-                viewModel.update(updated)
+            editingRecipe?.let { original ->
+                val updated = original.copy(
+                    name = nameInput.text.toString(),
+                    category = categorySpinner.selectedItem.toString()
+                )
+                recipeViewModel.modifyRecipe(updated)
                 finish()
             }
         }
 
         findViewById<Button>(R.id.deleteButton).setOnClickListener {
-            currentRecipe?.let {
-                viewModel.delete(it)
+            editingRecipe?.let {
+                recipeViewModel.removeRecipe(it)
                 finish()
             }
         }

@@ -8,28 +8,28 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.culinarycompanion.data.Recipe
 
 class RecipeAdapter(
-    private val recipes: List<Recipe>,
-    private val onItemClick: (Recipe) -> Unit
-) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
+    private val recipeList: List<Recipe>,
+    private val clickListener: (Recipe) -> Unit
+) : RecyclerView.Adapter<RecipeAdapter.RecipeHolder>() {
 
-    inner class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val nameText: TextView = itemView.findViewById(R.id.tvTitle)
+    inner class RecipeHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val titleView: TextView = itemView.findViewById(R.id.tvTitle)
 
-        fun bind(recipe: Recipe) {
-            nameText.text = recipe.name
-            itemView.setOnClickListener { onItemClick(recipe) }
+        fun setupWith(recipe: Recipe) {
+            titleView.text = recipe.name
+            itemView.setOnClickListener { clickListener(recipe) }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_recipe, parent, false)
-        return RecipeViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val view = inflater.inflate(R.layout.item_recipe, parent, false)
+        return RecipeHolder(view)
     }
 
-    override fun getItemCount() = recipes.size
-
-    override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
-        holder.bind(recipes[position])
+    override fun onBindViewHolder(holder: RecipeHolder, position: Int) {
+        holder.setupWith(recipeList[position])
     }
+
+    override fun getItemCount() = recipeList.size
 }
